@@ -5,7 +5,7 @@
 
 Xnorlax é uma Api Rest integrada com PostgreSQL
 
-Para visualizar este projeto, por favor, acesse: [xnorlax.herokuapp.com](https://xnorlax.hurokuapp.com)
+Para visualizar este projeto, por favor, acesse: [xnorlax.herokuapp.com](https://xnorlax.herokuapp.com)
 
 ## Tecnologias utilizadas
 ### Back end
@@ -16,8 +16,8 @@ Para visualizar este projeto, por favor, acesse: [xnorlax.herokuapp.com](https:/
 - Back end: Heroku
 - Banco de dados: PostgreSQL
 
-## Como executar o projeto:
-### Back end:
+## Como executar o projeto
+### Back end
 ```bash
 # Clonar o repositório
 git clone https://github.com/deyvischarles/xnorlax
