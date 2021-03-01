@@ -22,7 +22,7 @@ Para visualizar este projeto, por favor, acesse: [xnorlax.herokuapp.com](https:/
 # Clonar o repositório
 git clone https://github.com/deyvischarles/xnorlax
 
-# Entrar na pasta do projeto front end web
+# Entrar na pasta do projeto
 cd xnorlax
 
 # Instalar as dependências
