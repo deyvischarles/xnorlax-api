@@ -10,14 +10,13 @@ Para visualizar este projeto, por favor, acesse: [xnorlax.herokuapp.com](https:/
 ## Tecnologias utilizadas
 ### Back end
 - Node js
-- Javascript
+- Typescript
 
 ## Implantação em produção
 - Back end: Heroku
 - Banco de dados: PostgreSQL
 
 ## Como executar o projeto
-### Back end
 ```bash
 # Clonar o repositório
 git clone https://github.com/deyvischarles/xnorlax

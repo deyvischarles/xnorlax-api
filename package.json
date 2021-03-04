@@ -2,22 +2,25 @@
   "name": "xnorlax",
   "version": "1.0.0",
   "description": "api rest",
-  "main": "index.js",
-  "type": "module",
-  "scripts": {
-    "dev": "nodemon -r dotenv/config index.js",
-    "start": "node index.js"
-  },
   "author": "Deyvis charles",
-  "license": "ISC",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "typeorm": "ts-node-dev node_modules/typeorm/cli.js",
+    "dev": "ts-node-dev --transpile-only --ignore-watch node_modules -r dotenv/config src/server.ts",
+    "build": "tsc",
+    "start": "node build/server.js"
+  },
   "dependencies": {
     "express": "^4.17.1",
     "pg": "^8.5.1",
-    "sequelize": "^6.5.0"
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.31"
   },
   "devDependencies": {
+    "@types/express": "^4.17.11",
     "dotenv": "^8.2.0",
-    "nodemon": "^2.0.7",
-    "sequelize-cli": "^6.2.0"
+    "ts-node-dev": "^1.1.6",
+    "typescript": "^4.2.2"
   }
 }
