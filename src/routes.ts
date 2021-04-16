@@ -1,7 +1,5 @@
 import { Router } from 'express'
 
-import Users from './routes/users'
-
 const routes = Router()
 
 routes.get('/', (req, res) => {
@@ -15,7 +13,5 @@ routes.get('/blog', (req, res) => {
         message: 'Blog'
     })
 })
-
-routes.post('/users', Users.store)
 
 export default routes

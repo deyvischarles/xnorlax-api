@@ -6,17 +6,13 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "typeorm": "ts-node-dev node_modules/typeorm/cli.js",
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules -r dotenv/config src/server.ts",
     "build": "tsc",
     "start": "node build/server.js"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
-    "express": "^4.17.1",
-    "pg": "^8.5.1",
-    "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.2.31"
+    "express": "^4.17.1"
   },
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",

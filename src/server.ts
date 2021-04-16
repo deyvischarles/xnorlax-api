@@ -1,4 +1,3 @@
-import './database/connection'
 import express, { json } from 'express'
 import routes from './routes'
 
