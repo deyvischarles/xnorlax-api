@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-// import User from './routes/user'
+import User from './routes/user'
 
 const routes = Router()
 
@@ -16,6 +16,6 @@ routes.get('/blog', (req, res) => {
     })
 })
 
-// routes.post('/register', User.register)
+routes.post('/register', User.register)
 
 export default routes
