@@ -1,5 +1,7 @@
 import { Router } from 'express'
 
+import User from './routes/user'
+
 const routes = Router()
 
 routes.get('/', (req, res) => {
@@ -13,5 +15,7 @@ routes.get('/blog', (req, res) => {
         message: 'Blog'
     })
 })
+
+routes.post('/register', User.register)
 
 export default routes
