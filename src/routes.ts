@@ -1,21 +1,13 @@
 import { Router } from 'express'
 
+import Home from './routes/home'
+import Blog from './routes/blog'
 import User from './routes/user'
 
 const routes = Router()
 
-routes.get('/', (req, res) => {
-    res.json({
-        message: 'Bem-vindo(a) a Api Xnorlax (by Deyvis Charles: github.com/deyvischarles, linkedin.com/in/deyvischarles)'
-    })
-})
-
-routes.get('/blog', (req, res) => {
-    res.json({
-        message: 'Blog'
-    })
-})
-
+routes.get('/', Home.index)
+routes.get('/blog', Blog.index)
 routes.post('/register', User.register)
 
 export default routes
