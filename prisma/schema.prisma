@@ -23,3 +23,11 @@ model Profile {
   user   User   @relation(fields: [userId], references: [id])
   userId String    @unique
 }
+
+model SupportSettings {
+  id String @id @default(uuid())
+  userName String
+  chat Boolean @default(true)
+  createAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
