@@ -46,7 +46,7 @@ class User {
             password = await Bcrypt.hash(password, 10)
 
             await prisma.user.create({ data: { name, email, password } }).then((newUser: any) => {
-                newUser.password = undefined
+                delete newUser.password
 
                 if (newUser) {
                     res.send({
