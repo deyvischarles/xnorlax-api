@@ -1,5 +1,5 @@
 class Verify {
-    isEmpyt(imput: string)
+    isEmpyt (imput: string)
     {
         const sanitize = imput ? imput.trim() : undefined
         const outpt = sanitize
@@ -23,7 +23,8 @@ class Verify {
         {
             return true
         }
-        else {
+        else
+        {
             return false
         }
     }
@@ -37,7 +38,8 @@ class Verify {
         {
             return true
         }
-        else {
+        else
+        {
             return false
         }
     }

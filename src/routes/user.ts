@@ -2,6 +2,7 @@ import { Request, Response} from 'express'
 import { PrismaClient } from '@prisma/client'
 import Bcrypt from 'bcrypt'
 import Verify from '../utils/verify'
+import Token from '../utils/token'
 
 class User {
     public async register (req: Request, res: Response) {
@@ -51,7 +52,8 @@ class User {
                 if (newUser) {
                     res.send({
                         message: 'Usuário cadastrado com sucesso!',
-                        user: newUser
+                        user: newUser,
+                        token: Token.generate({id: newUser.id})
                     })
                 } else {
                     res.status(400).send({
