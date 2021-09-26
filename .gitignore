@@ -3,3 +3,6 @@ node_modules/
 
 # Variables file
 .env
+
+# Workspace
+api.code-workspace

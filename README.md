@@ -21,7 +21,7 @@ Para visualizar este projeto, por favor, acesse: [xnorlax.herokuapp.com](https:/
 ## Como executar o projeto
 ```bash
 # Clonar o repositório
-git clone https://github.com/deyvischarles/xnorlax-backend
+git clone https://github.com/deyvischarles/xnorlax-api
 
 # Entrar na pasta do projeto
 cd xnorlax-backend
