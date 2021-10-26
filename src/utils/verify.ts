@@ -1,4 +1,14 @@
 class Verify {
+    EmpytObject (imput: object) {
+        const hasOwnProperty = Object.prototype.hasOwnProperty
+
+        for (var key in imput) {
+            if (hasOwnProperty.call(imput, key)) return false
+        }
+
+        return true
+    }
+    
     isEmpyt (imput: string)
     {
         const sanitize = imput ? imput.trim() : undefined
