@@ -24,16 +24,16 @@ Para visualizar este projeto, por favor, acesse: [xnorlax.herokuapp.com](https:/
 git clone https://github.com/deyvischarles/xnorlax-api
 
 # Entrar na pasta do projeto
-cd xnorlax-backend
+cd xnorlax-api
 
 # Instalar as dependências
-npm install
+yarn install
 
 # Gerar build
-npm build
+yarn build
 
 # Executar o projeto
-npm start
+yarn start
 ```
 
 ## Autor

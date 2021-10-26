@@ -1,6 +1,9 @@
 # Dependency directories
 node_modules/
 
+# Directories
+dist/
+
 # Variables file
 .env
 
