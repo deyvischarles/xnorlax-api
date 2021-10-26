@@ -93,7 +93,7 @@ class Verify {
         const sanitize = imput.trim()
         const password = sanitize
 
-        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ @#$%&*_^])[0-9a-zA-Z @#$%&*_^]{8,}$/
+        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ @#$%&£*_^/~])[0-9a-zA-Z @#$%&£*_^/~]{8,}$/
 
         if (RegExp(regex).test(password) == false)
         {

@@ -9,6 +9,7 @@ class User {
         const prisma = new PrismaClient
 
         let { name, email, password } = req.body
+        let level = 'noob'
 
         if (Verify.isEmpyt(name)) {
             res.status(400).send({
@@ -46,7 +47,13 @@ class User {
         } else {
             password = await Bcrypt.hash(password, 10)
 
-            await prisma.user.create({data: {name, email, password}}).then((newUser: any) => {
+            await prisma.user.findMany().then((users) => {
+                if (users.length === 0) {
+                    level = 'founder'
+                }
+            })
+
+            await prisma.user.create({data: {name, email, password, level}}).then((newUser: any) => {
                 delete newUser.password
 
                 if (newUser) {
@@ -75,7 +82,11 @@ class User {
         const prisma = new PrismaClient
 
         const users = await prisma.user.findMany().then((users) => {
-            if (users) {
+            for (let index in users) {
+                delete users[index].password
+            }
+
+            if (users.length > 0) {
                 res.send({
                     acount: users.length,
                     users: users
