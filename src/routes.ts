@@ -15,7 +15,7 @@ routes.get('/blog', Blog.index)
 routes.post('/authenticate', Security.authenticate)
 
 routes.post('/register', User.register)
-routes.post('/users', Middleware, User.getUsers)
+routes.get('/users', Middleware, User.getUsers)
 routes.get('/user/:id', Middleware, User.getUser)
 routes.patch('/user/:id/name', Middleware, User.updateName)
 routes.patch('/user/:id/email', Middleware, User.updateEmail)
