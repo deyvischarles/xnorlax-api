@@ -17,6 +17,7 @@ model User {
   level String @default("noob")
   profile Profile?
   groups Group[]
+  posts Post[]
 }
 
 model Profile {
@@ -34,6 +35,20 @@ model Group {
   updatedAt DateTime @updatedAt
   title String
   members User[]
+  posts Post[]
+}
+
+model Post {
+  id String @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  title String @db.VarChar(255)
+  content String?
+  thumb String?
+  published Boolean @default(false)
+  groups Group[]
+  author User @relation(fields: [userId], references: [id])
+  userId String @unique
 }
 
 model SupportSettings {
