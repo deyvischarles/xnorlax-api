@@ -117,18 +117,10 @@ class User {
 
         const user = await prisma.user.findUnique({where: {id: req.params.id}}).then((user: any) => {
             delete user.password
-
-            if (user) {
-                res.send(user)
-            } else {
-                res.status(400).send({
-                    message: 'Usuário não encontrado!'
-                })
-            }
-        }).catch((err) => {
+            res.send(user)
+        }).catch(() => {
             res.status(400).send({
-                message: 'Erro ao pesquisar usuário, tente novamente mais tarde!',
-                debug: err
+                message: 'Usuário não encontrado!'
             })
         })
     }
