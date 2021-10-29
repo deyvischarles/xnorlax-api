@@ -6,6 +6,7 @@ import Home from './routes/home'
 import Blog from './routes/blog'
 import User from './routes/user'
 import Security from './routes/security'
+import survey from './routes/survey'
 
 const routes = Router()
 
@@ -22,5 +23,6 @@ routes.patch('/user/:id/email', Middleware, User.updateEmail)
 routes.patch('/user/:id/password', Middleware, User.updatePassword)
 routes.delete('/user/:id', Middleware, User.deleteUser)
 
+routes.post('/survey', Middleware, survey.createSurvey)
 
 export default routes
