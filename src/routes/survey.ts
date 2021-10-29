@@ -13,7 +13,7 @@ class Survey {
 
         if (Verify.isEmpyt(title)) {
             res.status(400).send({
-                message: "O campo de titulo está vazio!"
+                message: "O campo do título está vazio!"
             })
         } else if (Verify.isEmpyt(description)) {
             res.status(400).send({
@@ -27,7 +27,7 @@ class Survey {
             await prisma.survey.create({data: {title, description, userId}}).then((newSurvey: any) => {
                 if (newSurvey) {
                     res.send({
-                        message: 'Pesquisa cadastrado com sucesso!',
+                        message: 'Pesquisa cadastrada com sucesso!',
                         survey: newSurvey
                     })
                 } else {
