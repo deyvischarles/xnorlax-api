@@ -14,10 +14,11 @@ model User {
   email String @unique
   password String
   name String
-  level String @default("noob")
+  level Int @default(1)
   profile Profile?
   groups Group[]
   posts Post[]
+  surveys Survey[]
 }
 
 model Profile {
@@ -47,6 +48,16 @@ model Post {
   thumb String?
   published Boolean @default(false)
   groups Group[]
+  author User @relation(fields: [userId], references: [id])
+  userId String @unique
+}
+
+model Survey {
+  id String @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  title String
+  description String
   author User @relation(fields: [userId], references: [id])
   userId String @unique
 }
