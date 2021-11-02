@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import cors from 'cors'
 
 import Middleware from './middlewares/authenticate'
 
@@ -10,13 +11,22 @@ import survey from './routes/survey'
 
 const routes = Router()
 
-routes.get('/', Home.index)
+const corsOptions = {
+    origin: process.env.WHITE_LIST,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"]
+}
+
+routes.get('/', cors({
+    origin: process.env.WHITE_LIST,
+    methods: ["GET"]
+}), Home.index)
+
 routes.get('/blog', Blog.index)
 
 routes.post('/authenticate', Security.authenticate)
 
 routes.post('/register', User.register)
-routes.get('/users', Middleware, User.getUsers)
+routes.get('/users', cors(corsOptions), Middleware, User.getUsers)
 routes.get('/user/:id', Middleware, User.getUser)
 routes.patch('/user/:id/name', Middleware, User.updateName)
 routes.patch('/user/:id/email', Middleware, User.updateEmail)

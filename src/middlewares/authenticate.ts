@@ -2,8 +2,8 @@ import { Request, Response, NextFunction } from 'express'
 import jwt from 'jsonwebtoken'
 
 export default function authenticate (req: Request, res: Response, next: NextFunction) {
-    res.header('Access-Control-Allow-Origin', '*')
-    res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE')
+    // res.header('Access-Control-Allow-Origin', process.env.WHITELIST)
+    // res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE')
 
     const { authorization } = req.headers
 
@@ -14,7 +14,7 @@ export default function authenticate (req: Request, res: Response, next: NextFun
     } else {
         const parts = authorization.split(' ')
 
-        if (parts.length != 2) {
+        if (parts.length !== 2) {
             res.status(401).send({
                 message: 'Token mau formatado!'
             })
