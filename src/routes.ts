@@ -1,6 +1,5 @@
-import { Router } from 'express'
+import { Request, Router } from 'express'
 import cors from 'cors'
-
 import Middleware from './middlewares/authenticate'
 
 import Home from './routes/home'
@@ -11,28 +10,32 @@ import survey from './routes/survey'
 
 const routes = Router()
 
-const corsOptions = {
-    origin: process.env.WHITE_LIST,
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"]
+const whitelist = process.env.WHITE_LIST
+const corsOptions = (req: Request, callback: any) => {
+    let corsOptions = {}
+
+    if (whitelist.indexOf(req.header('Origin')) !== -1) {
+        corsOptions = { origin: true }
+    } else {
+        corsOptions = { origin: false }
+    }
+    
+    callback(null, corsOptions)
 }
 
-routes.get('/', cors({
-    origin: process.env.WHITE_LIST,
-    methods: ["GET"]
-}), Home.index)
+routes.get('/', cors(), Home.index)
+routes.get('/blog', cors(), Blog.index)
 
-routes.get('/blog', Blog.index)
+routes.post('/authenticate', cors(corsOptions), Security.authenticate)
 
-routes.post('/authenticate', Security.authenticate)
-
-routes.post('/register', User.register)
+routes.post('/register', cors(corsOptions), User.register)
 routes.get('/users', cors(corsOptions), Middleware, User.getUsers)
-routes.get('/user/:id', Middleware, User.getUser)
-routes.patch('/user/:id/name', Middleware, User.updateName)
-routes.patch('/user/:id/email', Middleware, User.updateEmail)
-routes.patch('/user/:id/password', Middleware, User.updatePassword)
-routes.delete('/user/:id', Middleware, User.deleteUser)
+routes.get('/user/:id', cors(corsOptions), Middleware, User.getUser)
+routes.patch('/user/:id/name', cors(corsOptions), Middleware, User.updateName)
+routes.patch('/user/:id/email', cors(corsOptions), Middleware, User.updateEmail)
+routes.patch('/user/:id/password', cors(corsOptions), Middleware, User.updatePassword)
+routes.delete('/user/:id', cors(corsOptions), Middleware, User.deleteUser)
 
-routes.post('/survey', Middleware, survey.createSurvey)
+routes.post('/survey', cors(corsOptions), Middleware, survey.createSurvey)
 
 export default routes
