@@ -106,7 +106,7 @@ class User {
             }
         }).catch((err) => {
             res.status(400).send({
-                message: 'Erro ao procurar usuários, tente novamente mais tarde!',
+                message: 'Erro ao procurar usuários, tente novamente ou reporte-nos!',
                 debug: err
             })
         })
@@ -160,7 +160,7 @@ class User {
                 }
             }).catch((err) => {
                 res.status(400).send({
-                    message: 'Erro ao atualizar usuário, tente novamente mais tarde!',
+                    message: 'Erro ao atualizar usuário, tente novamente ou reporte-nos!',
                     debug: err
                 })
             })
@@ -206,7 +206,7 @@ class User {
                 }
             }).catch((err) => {
                 res.status(400).send({
-                    message: 'Erro ao atualizar email, tente novamente mais tarde!',
+                    message: 'Erro ao atualizar email, tente novamente ou reporte-nos!',
                     debug: err
                 })
             })
@@ -214,35 +214,60 @@ class User {
     }
 
     public async updatePassword (req: Request, res: Response) {
+        let { oldPassword, password, passwordConfirmation } = req.body
+        let paramsId = req.params.id
+
         const prisma = new PrismaClient
 
-        if (! await prisma.user.findUnique({where: {id: req.params.id}})) {
+        const user = await prisma.user.findUnique({
+            where: {
+                id: paramsId
+            }
+        })
+
+        if (! await prisma.user.findUnique({where: {id: paramsId}})) {
             res.status(400).send({
                 message: "Usuário não encontrado!"
             })
-        } else if (req.userId != req.params.id) {
+        } else if (req.userId !== paramsId) {
             res.send({
                 message: "Tentativa Negada!"
             })
-        } else if (Verify.isEmpyt(req.body.password)) {
+        } else if (Verify.isEmpyt(oldPassword)) {
+            res.status(400).send({
+                message: "O campo de senha antiga está vazio!"
+            })
+        } else if (!await Bcrypt.compare(oldPassword, user.password)) {
+            res.status(401).send({
+                message: 'Senha incorreta!'
+            })
+        } else if (Verify.isEmpyt(password)) {
             res.status(400).send({
                 message: "O campo de senha está vazio!"
             })
-        } else if (Verify.minLength(req.body.password, 8)) {
+        } else if (Verify.minLength(password, 8)) {
             res.status(400).send({
-                message: "Senha muito curta!"
+                message: "Senha muito curta! Mínimo 8 caracteres."
             })
-        } else if (Verify.notSecurity(req.body.password)) {
+        } else if (Verify.notSecurity(password)) {
             res.status(400).send({
                 message: "Senha muito Fraca!",
-                dicas: "Acrescente letras maiúsculas, números, símbolos e/ou espaços vazios. Mínimo 8 caracteres"
+                dicas: "Acrescente letras maiúsculas, números, símbolos e/ou espaços em branco."
+            })
+        } else if (Verify.isEmpyt(passwordConfirmation)) {
+            res.status(400).send({
+                message: "Confirme a senha!"
+            })
+        } else if (passwordConfirmation !== password) {
+            res.status(400).send({
+                message: "As senhas não coincidem!"
             })
         } else {
-            const password = await Bcrypt.hash(req.body.password, 10)
+            const passwordUpdate = await Bcrypt.hash(password, 10)
 
             const userUpdate = await prisma.user.update({
-                where: {id: req.params.id},
-                data: {password: password}
+                where: {id: paramsId},
+                data: {password: passwordUpdate}
             }).then((userUpdate) => {
                 if (userUpdate) {
                     res.send({
@@ -255,7 +280,7 @@ class User {
                 }
             }).catch((err) => {
                 res.status(400).send({
-                    message: 'Erro ao atualizar senha, tente novamente mais tarde!',
+                    message: 'Erro ao atualizar senha, tente novamente ou reporte-nos!',
                     debug: err
                 })
             })
@@ -287,7 +312,7 @@ class User {
                 }
             }).catch((err) => {
                 res.status(400).send({
-                    message: 'Erro ao apagar usuário, tente novamente mais tarde!',
+                    message: 'Erro ao apagar usuário, tente novamente ou reporte-nos!',
                     debug: err
                 })
             })
