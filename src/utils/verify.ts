@@ -59,7 +59,7 @@ class Verify {
         const sanitize = imput.trim()
         const name = sanitize
 
-        const regex = /^([áàÁÀéèÉÈíìÍÌóÒúùÚÙa-zA-Z])([áàÁÀéèÉÈíìÍÌóÒúùÚÙ a-zA-Z]){3,}$/
+        const regex = /^([a-zA-Zà-úÀ-Ú\s])([a-zA-Zà-úÀ-Ú\s]){3,50}$/
 
         if (RegExp(regex).test(name) == false)
         {
@@ -93,7 +93,7 @@ class Verify {
         const sanitize = imput.trim()
         const password = sanitize
 
-        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ @#$%&£*_^/~])[0-9a-zA-Z @#$%&£*_^/~]{8,}$/
+        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ @#$%&£*_^/~])[0-9a-zA-Z @#$%&£*_^/~]{8,50}$/
 
         if (RegExp(regex).test(password) == false)
         {
